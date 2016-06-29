@@ -22,43 +22,41 @@ namespace WeixinClient
 
         private LoginForm _login_form;
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private void change_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string oid = textBox3.Text;
-            if (!_login_form.get_pwd().Equals(oid))
-            {
-                MessageBox.Show("您输入的原始密码不匹配，请重新输入！！", "!!错误!!");
-            }
-            if (!_login_form.get_pwd().Equals(oid))
-            {
-                MessageBox.Show("您输入的原始密码不匹配，请重新输入！！", "!!错误!!");
-            }
-
-
-
-
-
+            _login_form.Visible = true;
         }
 
-       
-        private void button1_Click(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (newPwdTextBox.Text.Trim().Length > 0 && oldPwdtextBox.Text.Trim().Length > 0)
+            {
+                this.ChangePwd.Enabled = true;
+            }
+        }
+
+        private void Return_Click(object sender, EventArgs e)
         {
             _login_form.Visible = true;
             this.Close();
         }
 
-        private void change_FormClosing(object sender, FormClosingEventArgs e)
+        private void chagnePwd_Click(object sender, EventArgs e)
         {
-            _login_form.Visible = true;
-            //this.Close();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox2.Text.Trim().Length > 0 && textBox1.Text.Trim().Length > 0 && textBox3.Text.Trim().Length > 0)
+            if(!_login_form.verifyPasswd(oldPwdtextBox.Text))
             {
-                this.button1.Enabled = true;
+                MessageBox.Show("您输入的初始密码不匹配，请重新输入！！", "!!错误!!");
             }
+            else if (newPwdTextBox.Text.Length < 6 || !_login_form.saveNewAdmin(newPwdTextBox.Text))
+            {
+                MessageBox.Show("更新密码失败，请重新输入！！", "!!错误!!");
+            } else
+            {
+                _login_form.Visible = true;
+                this.Close();
+            }
+            
         }
     }
 }

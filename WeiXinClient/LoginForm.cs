@@ -17,20 +17,20 @@ namespace WeixinClient
         {
             InitializeComponent();
             InitLocalDB(dbPath);
-            
+            this.localDBPath = dbPath;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            read_verify_info_from_db();
-
-            if (ACCOUNT.Equals(textBox1.Text) && _pwd.Equals(textBox2.Text)) {
-                
-                Form main_form = new Form1();
+                 
+            if (this.verifyIdentify()) {
+                this.Visible = false;
+                Form main_form = new HomeForm(localDBPath);
                 main_form.StartPosition = FormStartPosition.CenterScreen;
                 main_form.ShowDialog();
+                
                 this.Close();
             } else
             {
@@ -63,9 +63,6 @@ namespace WeixinClient
                 sql = string.Format(@"insert into user (account, pwd, isadmin ) select 'admin', '{0}', 1 
             where not exists(select 1 from user where account = 'admin' and isadmin = 1)", Encrypt.Encode("888888",KEY));
 
-
-                string x = Encrypt.Encode("888888", KEY);
-                string y = Encrypt.Decode(x, KEY);
                 SQLiteCommand insertAdmin = new SQLiteCommand(sql, dbConn);
                 insertAdmin.ExecuteNonQuery();
 
@@ -78,36 +75,46 @@ namespace WeixinClient
             }
         }
 
-        void read_verify_info_from_db()
+        private bool verifyIdentify()
+        {
+            if (this.accountTextBox.Text != ACCOUNT) return false;
+
+            return verifyPasswd(pwdTextBox.Text);
+
+        }
+        
+        public bool verifyPasswd(string input)
         {
             string sql = @"select pwd from user where isadmin = 1 and account = 'admin' limit 1";
-
             try
             {
+                string pwd = "";
                 dbConn.Open();
                 SQLiteCommand comm = new SQLiteCommand(sql, dbConn);
                 using (SQLiteDataReader read = comm.ExecuteReader())
                 {
-                    while (read.Read())
-                    {               
-                        _pwd = read.GetValue(read.GetOrdinal("pwd")).ToString();                   
-                    } 
 
-                    if(string.IsNullOrEmpty(_pwd))
-                    {                    
-                        _pwd = "888888";
+                    while (read.Read())
+                    {
+                        pwd = read.GetValue(read.GetOrdinal("pwd")).ToString();
+                    }
+
+                    if (string.IsNullOrEmpty(pwd))
+                    {
+                        return false;
                     }
                 }
                 dbConn.Close();
+
+                return input == Encrypt.Decode(pwd, KEY);
             }
-            catch (System.Data.SQLite.SQLiteException ex)
+            catch (System.Data.SQLite.SQLiteException)
             {
-
-                MessageBox.Show(ex.ToString());
+             
+                return false;
             }
-
         }
-        
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -120,17 +127,12 @@ namespace WeixinClient
             
         }
 
-        public string get_pwd()
-        {
-            return _pwd;
-        }
 
         public bool saveNewAdmin(string pwd)
         {
 
-            string sql = string.Format( @"insert or replace into user 
-            (id, account , pwd , comment, isadmin ) values 
-            (select id from user where isadmin = 1, admin,'{1}','administor', 1)", pwd);
+            string sql = string.Format( @"update user set
+            pwd = '{0}' where isadmin = 1 and account = 'admin'", Encrypt.Encode(pwd, KEY));
             dbConn.Open();
             SQLiteCommand command = new SQLiteCommand(sql, dbConn);
             int count = command.ExecuteNonQuery();
@@ -142,7 +144,7 @@ namespace WeixinClient
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (textBox2.Text.Trim().Length > 0 && textBox1.Text.Trim().Length > 0)
+            if (pwdTextBox.Text.Trim().Length > 0 && accountTextBox.Text.Trim().Length > 0)
             {
                 this.button1.Enabled = true;
             }

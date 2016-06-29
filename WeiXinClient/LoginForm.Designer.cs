@@ -34,8 +34,8 @@ namespace WeixinClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.accountTextBox = new System.Windows.Forms.TextBox();
+            this.pwdTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -78,22 +78,21 @@ namespace WeixinClient
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // accountTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(111, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(122, 21);
-            this.textBox1.TabIndex = 1;
+            this.accountTextBox.Location = new System.Drawing.Point(111, 45);
+            this.accountTextBox.Name = "accountTextBox";
+            this.accountTextBox.Size = new System.Drawing.Size(122, 21);
+            this.accountTextBox.TabIndex = 1;
             // 
-            // textBox2
+            // pwdTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(111, 98);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(122, 21);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.Focus();
+            this.pwdTextBox.Location = new System.Drawing.Point(111, 98);
+            this.pwdTextBox.Name = "pwdTextBox";
+            this.pwdTextBox.PasswordChar = '*';
+            this.pwdTextBox.Size = new System.Drawing.Size(122, 21);
+            this.pwdTextBox.TabIndex = 2;
+            this.pwdTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -114,25 +113,26 @@ namespace WeixinClient
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // login
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(308, 221);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pwdTextBox);
+            this.Controls.Add(this.accountTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
-            this.Name = "login";
+            this.MaximizeBox = false;
+            this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "管理员登录";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.MaximizeBox = false;
+
         }
 
         #endregion
@@ -141,14 +141,13 @@ namespace WeixinClient
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox accountTextBox;
+        private System.Windows.Forms.TextBox pwdTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button2;
         private const string KEY = "44ee68b3-4e7a-4cbb-980c-6ece09bce6ad";
-        private string ACCOUNT = "admin";
-
-        private string _pwd;
+        private const string ACCOUNT = "admin";
+        private string localDBPath;
         private SQLiteConnection dbConn;
     }
 }
