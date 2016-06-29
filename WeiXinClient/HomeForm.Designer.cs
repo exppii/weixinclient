@@ -44,7 +44,11 @@ namespace WeixinClient
             this.webpanel = new System.Windows.Forms.Panel();
             this.login = new System.Windows.Forms.Button();
             this.logout = new System.Windows.Forms.Button();
+            this.contralPanel = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.webpanel.SuspendLayout();
+            this.contralPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -54,9 +58,9 @@ namespace WeixinClient
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(43, 259);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(342, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(367, 300);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -73,10 +77,11 @@ namespace WeixinClient
             // 
             this.Column3.HeaderText = "备注";
             this.Column3.Name = "Column3";
+            this.Column3.Width = 120;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(203, 160);
+            this.button1.Location = new System.Drawing.Point(24, 604);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -87,7 +92,7 @@ namespace WeixinClient
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 32);
+            this.label1.Location = new System.Drawing.Point(22, 469);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 2;
@@ -96,7 +101,7 @@ namespace WeixinClient
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(274, 32);
+            this.label2.Location = new System.Drawing.Point(22, 519);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 2;
@@ -104,21 +109,21 @@ namespace WeixinClient
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(130, 27);
+            this.textBox1.Location = new System.Drawing.Point(103, 464);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 3;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(331, 27);
+            this.textBox2.Location = new System.Drawing.Point(103, 510);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 21);
             this.textBox2.TabIndex = 3;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(276, 103);
+            this.button2.Location = new System.Drawing.Point(228, 604);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -128,7 +133,7 @@ namespace WeixinClient
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(91, 103);
+            this.button3.Location = new System.Drawing.Point(128, 604);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 1;
@@ -141,14 +146,15 @@ namespace WeixinClient
             this.webpanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webpanel.Location = new System.Drawing.Point(437, 12);
+            this.webpanel.Controls.Add(this.splitter1);
+            this.webpanel.Location = new System.Drawing.Point(391, 12);
             this.webpanel.Name = "webpanel";
-            this.webpanel.Size = new System.Drawing.Size(991, 774);
+            this.webpanel.Size = new System.Drawing.Size(1037, 792);
             this.webpanel.TabIndex = 4;
             // 
             // login
             // 
-            this.login.Location = new System.Drawing.Point(91, 201);
+            this.login.Location = new System.Drawing.Point(24, 327);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(75, 23);
             this.login.TabIndex = 1;
@@ -158,7 +164,7 @@ namespace WeixinClient
             // 
             // logout
             // 
-            this.logout.Location = new System.Drawing.Point(203, 201);
+            this.logout.Location = new System.Drawing.Point(150, 327);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(75, 23);
             this.logout.TabIndex = 1;
@@ -166,27 +172,47 @@ namespace WeixinClient
             this.logout.UseVisualStyleBackColor = true;
             this.logout.Click += new System.EventHandler(this.logout_Click);
             // 
+            // contralPanel
+            // 
+            this.contralPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.contralPanel.Controls.Add(this.label1);
+            this.contralPanel.Controls.Add(this.button1);
+            this.contralPanel.Controls.Add(this.login);
+            this.contralPanel.Controls.Add(this.textBox2);
+            this.contralPanel.Controls.Add(this.dataGridView1);
+            this.contralPanel.Controls.Add(this.textBox1);
+            this.contralPanel.Controls.Add(this.logout);
+            this.contralPanel.Controls.Add(this.label2);
+            this.contralPanel.Controls.Add(this.button2);
+            this.contralPanel.Controls.Add(this.button3);
+            this.contralPanel.Location = new System.Drawing.Point(12, 12);
+            this.contralPanel.Name = "contralPanel";
+            this.contralPanel.Size = new System.Drawing.Size(373, 792);
+            this.contralPanel.TabIndex = 5;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 792);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1440, 816);
+            this.Controls.Add(this.contralPanel);
             this.Controls.Add(this.webpanel);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.logout);
-            this.Controls.Add(this.login);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
             this.Name = "HomeForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.webpanel.ResumeLayout(false);
+            this.contralPanel.ResumeLayout(false);
+            this.contralPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -200,15 +226,17 @@ namespace WeixinClient
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel webpanel;
         private System.Windows.Forms.Button login;
         private System.Windows.Forms.Button logout;
 
         private const string KEY = "a528fbe0-0c45-4e7e-973b-02f13692d76d";
+        private System.Windows.Forms.Panel contralPanel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }
 

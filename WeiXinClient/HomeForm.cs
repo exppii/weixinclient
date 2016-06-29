@@ -100,11 +100,7 @@ namespace WeixinClient
                 {
                     while (read.Read())
                     {
-                        //string comment = read.GetValue(read.GetOrdinal("comment")).ToString();
-                        //if (string.Empty == comment)
-                        //{
-
-                        //}
+                        
                         dataGridView1.Rows.Add(new object[] {
                         //read.GetValue(0),  // U can use column index
                         read.GetValue(read.GetOrdinal("account")),  // Or column name like this
@@ -182,5 +178,7 @@ namespace WeixinClient
             browser.Load("https://mp.weixin.qq.com/");
             System.Threading.Thread.Sleep(100);
         }
+
+       
     }
 }
