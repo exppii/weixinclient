@@ -1,0 +1,11 @@
+# folder
+.vs
+packages
+$tf
+WeiXinClient/bin
+WeiXinClient/obj
+
+#file
+
+*.db
+*.exe
