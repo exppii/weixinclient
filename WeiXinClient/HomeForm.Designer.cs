@@ -51,6 +51,7 @@ namespace WeiXinClient
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comment_textBox = new System.Windows.Forms.TextBox();
+            this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webpanel.SuspendLayout();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -189,7 +190,8 @@ namespace WeiXinClient
             this.ColumnID,
             this.ColumnAcc,
             this.ColumnPwd,
-            this.ColumnCom});
+            this.ColumnCom,
+            this.IndexColumn});
             this.dataGridView1.Location = new System.Drawing.Point(4, 20);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -263,6 +265,13 @@ namespace WeiXinClient
             this.comment_textBox.Size = new System.Drawing.Size(125, 21);
             this.comment_textBox.TabIndex = 3;
             // 
+            // IndexColumn
+            // 
+            this.IndexColumn.HeaderText = "index";
+            this.IndexColumn.Name = "IndexColumn";
+            this.IndexColumn.ReadOnly = true;
+            this.IndexColumn.Visible = false;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -298,6 +307,7 @@ namespace WeiXinClient
 
         private const string KEY = "a528fbe0-0c45-4e7e-973b-02f13692d76d";
         private long selectID = 0;
+        private int selectRowIndex = 0;
         private System.Windows.Forms.Panel contralPanel;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -309,6 +319,7 @@ namespace WeiXinClient
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCom;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox comment_textBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndexColumn;
     }
 }
 

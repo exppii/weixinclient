@@ -36,6 +36,11 @@ namespace WeiXinClient
         private void InitTable()
         {
             reloadData();
+            if(dataGridView1.Rows.Count > 1)
+            {
+                dataGridView1.Rows[0].Selected = true;
+                saveSelectInfo(0);
+            }
         }
 
 
@@ -49,16 +54,17 @@ namespace WeiXinClient
 
                 using (SQLiteDataReader read = comm.ExecuteReader())
                 {
+                    int count = 0;
                     while (read.Read())
                     {
                         var pwd = read.GetValue(read.GetOrdinal("pwd")).ToString();
 
-
                         dataGridView1.Rows.Add(new object[] {
-                        read.GetValue(read.GetOrdinal("id")),
+                        ++count,
                         read.GetValue(read.GetOrdinal("account")),  // Or column name like this
                         Encrypt.Decode(pwd,KEY),
-                        read.GetValue(read.GetOrdinal("comment"))
+                        read.GetValue(read.GetOrdinal("comment")),
+                        read.GetValue(read.GetOrdinal("id"))
                          });
                     }
                 }
@@ -85,31 +91,21 @@ namespace WeiXinClient
         private void login_Click(object sender, EventArgs e)
         {
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            var acc = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
+            var pwd = dataGridView1.Rows[selectRowIndex].Cells[2].Value.ToString();
+            if (browser.Address == "https://mp.weixin.qq.com/" && acc.Length > 0 && pwd.Length > 0)
             {
-                if (row.Selected)
-                {
-
-                    var acc = row.Cells[1].Value.ToString();
-                    var pwd = row.Cells[2].Value.ToString();
-
-                    if (browser.Address == "https://mp.weixin.qq.com/" && acc.Length > 0 && pwd.Length > 0)
-                    {
-                        browser.ExecuteScriptAsync(string.Format("document.getElementById('account').value = '{0}'",acc));
-                        System.Threading.Thread.Sleep(100);
-                        browser.ExecuteScriptAsync(string.Format("document.getElementById('pwd').value = '{0}'", pwd));
-                        System.Threading.Thread.Sleep(50);
-                        browser.ExecuteScriptAsync("document.getElementById('loginBt').click()");
-                    }
-                    else
-                    {
-                        browser.ExecuteScriptAsync("alert('请退出当前登录帐号！！！'，'错误')");
-                    }
-                }
-
-               
+                browser.ExecuteScriptAsync(string.Format("document.getElementById('account').value = '{0}'", acc));
+                System.Threading.Thread.Sleep(100);
+                browser.ExecuteScriptAsync(string.Format("document.getElementById('pwd').value = '{0}'", pwd));
+                System.Threading.Thread.Sleep(50);
+                browser.ExecuteScriptAsync("document.getElementById('loginBt').click()");
             }
-            
+            else
+            {
+                browser.ExecuteScriptAsync("alert('请退出当前登录帐号！！！'，'错误')");
+            }
+
 
         }
 
@@ -119,6 +115,11 @@ namespace WeiXinClient
             System.Threading.Thread.Sleep(200);
             browser.Load("https://mp.weixin.qq.com/");
             System.Threading.Thread.Sleep(100);
+            if(selectRowIndex < dataGridView1.Rows.Count -2)
+            {
+                dataGridView1.Rows[++selectRowIndex].Selected = true;
+                saveSelectInfo(selectRowIndex);
+            }
         }
 
         private void showMessage(string message, string title, Point point)
@@ -156,6 +157,11 @@ namespace WeiXinClient
                     showMessage("更新账号信息成功！！！","成功", offset);
 
                     reloadData();
+
+                    dataGridView1.Rows[0].Selected = false;
+                    dataGridView1.Rows[selectRowIndex].Selected = true;
+                    saveSelectInfo(selectRowIndex);
+
                 } else
                 { 
                     showMessage("更新账号信息失败！！！", "错误", offset);
@@ -185,6 +191,12 @@ namespace WeiXinClient
                 {
                     showMessage("删除账号信息成功！！！", "成功", offset);
                     reloadData();
+                    if(dataGridView1.Rows.Count > 1)
+                    {
+                        dataGridView1.Rows[0].Selected = true;
+                        saveSelectInfo(0);
+                    }
+                    
                 }
                 else
                 {
@@ -222,6 +234,9 @@ namespace WeiXinClient
                 {
                     showMessage("新增账号信息成功！！！", "成功", offset);
                     reloadData();
+                    dataGridView1.Rows[0].Selected = false;
+                    dataGridView1.Rows[selectRowIndex].Selected = true;
+                    saveSelectInfo(selectRowIndex);
                 }
                 else
                 {
@@ -253,10 +268,7 @@ namespace WeiXinClient
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            selectID = Convert.ToInt64(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-            account_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            pwd_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            comment_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            saveSelectInfo(e.RowIndex);
         }
 
         private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -266,17 +278,21 @@ namespace WeiXinClient
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex != -1)
+            if(e.RowIndex != -1 && e.RowIndex < dataGridView1.Rows.Count - 1) //dataGridView1 has an empty row
             {
                 dataGridView1.Rows[e.RowIndex].Selected = true;
-                selectID = Convert.ToInt64(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                account_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                pwd_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                comment_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-
+                saveSelectInfo(e.RowIndex);
             }
-                
-            
+
+        }
+
+        private void saveSelectInfo(int index)
+        {
+            selectRowIndex = index;
+            account_textBox.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            pwd_textBox.Text = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            comment_textBox.Text = dataGridView1.Rows[index].Cells[3].Value.ToString();
+            selectID = Convert.ToInt64(dataGridView1.Rows[index].Cells[4].Value.ToString());
         }
     }
 }
