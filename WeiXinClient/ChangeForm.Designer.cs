@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeForm));
             this.newPwdTextBox = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.oldPwdtextBox = new System.Windows.Forms.TextBox();
@@ -112,7 +113,7 @@
             this.label6.TabIndex = 0;
             this.label6.Text = " 旧密码: ";
             // 
-            // change
+            // ChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +126,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
-            this.Name = "change";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "ChangeForm";
             this.Text = " 修改管理信息";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.change_FormClosing);
             this.ResumeLayout(false);

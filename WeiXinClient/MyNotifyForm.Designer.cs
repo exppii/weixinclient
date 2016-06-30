@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyNotifyForm));
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
-            // NotifyForm
+            // MyNotifyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -70,7 +71,8 @@
             this.ClientSize = new System.Drawing.Size(332, 164);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
-            this.Name = "NotifyForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MyNotifyForm";
             this.Text = "NotifyForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
