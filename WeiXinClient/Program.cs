@@ -16,7 +16,8 @@ namespace WeixinClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             const string dbPath = "./local.db";
-            Application.Run(new LoginForm(dbPath));
+            //Application.Run(new LoginForm(dbPath));
+            Application.Run(new HomeForm(dbPath));
         }
     }
 }

@@ -35,18 +35,31 @@ namespace WeixinClient
 
         private void InitTable()
         {
+            reloadData();
+        }
+
+
+        private void reloadData()
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.Update();
+            dataGridView1.Refresh();
             try
             {
                 dbConn.Open();
-                SQLiteCommand comm = new SQLiteCommand("Select account, pwd,comment From user where isadmin = 0", dbConn);
+                SQLiteCommand comm = new SQLiteCommand("Select id, account, pwd,comment From user where isadmin = 0", dbConn);
+
                 using (SQLiteDataReader read = comm.ExecuteReader())
                 {
                     while (read.Read())
                     {
-                        
+                        var pwd = read.GetValue(read.GetOrdinal("pwd")).ToString();
+
+
                         dataGridView1.Rows.Add(new object[] {
+                        read.GetValue(read.GetOrdinal("id")),
                         read.GetValue(read.GetOrdinal("account")),  // Or column name like this
-                        read.GetValue(read.GetOrdinal("pwd")),
+                        Encrypt.Decode(pwd,KEY),
                         read.GetValue(read.GetOrdinal("comment"))
                          });
                     }
@@ -60,7 +73,6 @@ namespace WeixinClient
             }
         }
 
-
         private ChromiumWebBrowser browser;
         private void InitBrowser()
         {
@@ -71,70 +83,7 @@ namespace WeixinClient
             browser.Dock = DockStyle.Fill;
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string account = this.textBox1.Text;
-            string pwd = this.textBox2.Text;
-            string sql = string.Format(@"insert into user (account, pwd) values ('{0}', '{1}')", account, pwd);
-
-            dbConn.Open();
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            command.ExecuteNonQuery();
-            dbConn.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            dbConn.Open();
-            //DataSet data = new DataSet();
-            //SQLiteDataAdapter adapter = new SQLiteDataAdapter("Select account, pwd,comment From user", dbConn);
-
-            //adapter.Fill(data);
-            //dataGridView1.DataSource = data.Tables[0].DefaultView;
-            try
-            {
-                
-                SQLiteCommand comm = new SQLiteCommand("Select account, pwd,comment From user", dbConn);
-                using (SQLiteDataReader read = comm.ExecuteReader())
-                {
-                    while (read.Read())
-                    {
-                        
-                        dataGridView1.Rows.Add(new object[] {
-                        //read.GetValue(0),  // U can use column index
-                        read.GetValue(read.GetOrdinal("account")),  // Or column name like this
-                        read.GetValue(read.GetOrdinal("pwd")),
-                        read.GetValue(read.GetOrdinal("comment"))
-                         });
-                    }
-                }
-
-                dbConn.Close();
-            } catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if(row.Selected)
-                {
-                
-                    this.textBox1.Text = row.Cells[0].Value.ToString();
-                    this.textBox2.Text = row.Cells[1].Value.ToString();
-                }
-            }
-
-            
-            
-        }
+     
 
         private void login_Click(object sender, EventArgs e)
         {
@@ -144,10 +93,10 @@ namespace WeixinClient
                 if (row.Selected)
                 {
 
-                    var acc = row.Cells[0].Value.ToString();
-                    var pwd = row.Cells[1].Value.ToString();
+                    var acc = row.Cells[1].Value.ToString();
+                    var pwd = row.Cells[2].Value.ToString();
 
-                    if (browser.Address == "https://mp.weixin.qq.com/")
+                    if (browser.Address == "https://mp.weixin.qq.com/" && acc.Length > 0 && pwd.Length > 0)
                     {
                         browser.ExecuteScriptAsync(string.Format("document.getElementById('account').value = '{0}'",acc));
                         System.Threading.Thread.Sleep(100);
@@ -163,10 +112,6 @@ namespace WeixinClient
 
                
             }
-
-
-
-
             
 
         }
@@ -179,6 +124,28 @@ namespace WeixinClient
             System.Threading.Thread.Sleep(100);
         }
 
-       
+        private void update_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void delete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void insert_Click(object sender, EventArgs e)
+        {
+            string account = this.textBox1.Text;
+            string pwd = this.textBox2.Text;
+            string sql = string.Format(@"insert into user (account, pwd) values ('{0}', '{1}')", account, Encrypt.Encode(pwd, KEY));
+
+            dbConn.Open();
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            command.ExecuteNonQuery();
+            dbConn.Close();
+
+            reloadData();
+        }
     }
 }
