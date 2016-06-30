@@ -1,6 +1,6 @@
 ﻿using System.Data.SQLite;
 
-namespace WeixinClient
+namespace WeiXinClient
 {
     partial class LoginForm
     {

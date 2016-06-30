@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
 
-namespace WeixinClient
+namespace WeiXinClient
 {
     public partial class LoginForm : Form
     {
@@ -118,7 +118,7 @@ namespace WeixinClient
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form change_form = new change(this);
+            Form change_form = new ChangeForm(this);
 
             this.Visible = false;
 

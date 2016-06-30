@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WeixinClient
+namespace WeiXinClient
 {
-    public partial class change : Form
+    public partial class ChangeForm : Form
     {
-        public change(LoginForm login_form)
+        public ChangeForm(LoginForm login_form)
         {
             InitializeComponent();
             _login_form = login_form;

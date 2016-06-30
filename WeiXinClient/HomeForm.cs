@@ -13,7 +13,7 @@ using System.Data.SQLite;
 using CefSharp;
 using CefSharp.WinForms;
 
-namespace WeixinClient
+namespace WeiXinClient
 {
     public partial class HomeForm : Form
     {
@@ -30,7 +30,7 @@ namespace WeixinClient
         {
 
             dbConn = new SQLiteConnection(string.Format("Data Source={0};Version=3;", dbPath));
-
+            dbConn.Open();
         }
 
         private void InitTable()
@@ -41,12 +41,10 @@ namespace WeixinClient
 
         private void reloadData()
         {
-            dataGridView1.DataSource = null;
-            dataGridView1.Update();
-            dataGridView1.Refresh();
+            dataGridView1.Rows.Clear();
             try
             {
-                dbConn.Open();
+  
                 SQLiteCommand comm = new SQLiteCommand("Select id, account, pwd,comment From user where isadmin = 0", dbConn);
 
                 using (SQLiteDataReader read = comm.ExecuteReader())
@@ -65,7 +63,6 @@ namespace WeixinClient
                     }
                 }
 
-                dbConn.Close();
             }
             catch (Exception ex)
             {
@@ -124,28 +121,162 @@ namespace WeixinClient
             System.Threading.Thread.Sleep(100);
         }
 
+        private void showMessage(string message, string title, Point point)
+        {
+            Form notify = new WeiXinClient.MyNotifyForm(message, title, point);
+            notify.Location = point;
+            notify.Show();
+        }
+
         private void update_Click(object sender, EventArgs e)
         {
+            var offset = new Point();
+            offset.X = Cursor.Position.X - 150;
+            offset.Y = Cursor.Position.Y - 180;
+
+            if (!parametersIsValid(offset)) return;
+
+            string sql = @"update user set account = @Account, pwd = @Passwd, comment = @Comment where id = @Id";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+
+
+            try
+            {
+                command.Parameters.Add(new SQLiteParameter("@Account", account_textBox.Text));
+                command.Parameters.Add(new SQLiteParameter("@Passwd", Encrypt.Encode(pwd_textBox.Text,KEY)));
+                command.Parameters.Add(new SQLiteParameter("@Comment", comment_textBox.Text));
+                command.Parameters.Add(new SQLiteParameter("@Id", selectID));
+
+                var count = command.ExecuteNonQuery();
+
+               
+               
+                if (count == 1)
+                {
+                    showMessage("更新账号信息成功！！！","成功", offset);
+
+                    reloadData();
+                } else
+                { 
+                    showMessage("更新账号信息失败！！！", "错误", offset);
+                }
+            } catch(Exception ex)
+            {
+                showMessage(ex.ToString(), "错误", offset);
+            }
+            
 
         }
 
         private void delete_Click(object sender, EventArgs e)
         {
+            var offset = new Point();
+            offset.X = Cursor.Position.X - 150;
+            offset.Y = Cursor.Position.Y - 180;
 
+            string sql = @"delete  from user where id = @Id";
+            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+            
+            try {
+                command.Parameters.Add(new SQLiteParameter("@Id", selectID));
+                var count = command.ExecuteNonQuery();
+
+                if (count == 1)
+                {
+                    showMessage("删除账号信息成功！！！", "成功", offset);
+                    reloadData();
+                }
+                else
+                {
+                    showMessage("删除账号信息失败！！！", "错误", offset);
+                }
+            }
+            catch (Exception ex)
+            {
+                    showMessage(ex.ToString(), "错误", offset);
+            }
         }
 
         private void insert_Click(object sender, EventArgs e)
         {
-            string account = this.textBox1.Text;
-            string pwd = this.textBox2.Text;
-            string sql = string.Format(@"insert into user (account, pwd) values ('{0}', '{1}')", account, Encrypt.Encode(pwd, KEY));
 
-            dbConn.Open();
-            SQLiteCommand command = new SQLiteCommand(sql, dbConn);
-            command.ExecuteNonQuery();
+            var offset = new Point();
+            offset.X = Cursor.Position.X - 150;
+            offset.Y = Cursor.Position.Y - 180;
+
+            if (!parametersIsValid(offset)) return;
+
+            try { 
+
+                string sql = @"insert into user (account, pwd, comment) values (@Account, @Passwd, @Comment)";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConn);
+
+                command.Parameters.Add(new SQLiteParameter("@Account", account_textBox.Text));
+                command.Parameters.Add(new SQLiteParameter("@Passwd", Encrypt.Encode(pwd_textBox.Text, KEY)));
+                command.Parameters.Add(new SQLiteParameter("@Comment", comment_textBox.Text));
+            
+
+                var count = command.ExecuteNonQuery();
+
+                if (count == 1)
+                {
+                    showMessage("新增账号信息成功！！！", "成功", offset);
+                    reloadData();
+                }
+                else
+                {
+                    showMessage("新增账号信息失败！！！", "错误", offset);
+                }
+            }
+            catch (Exception ex)
+            {
+                showMessage(ex.ToString(), "错误", offset);
+            }
+        }
+
+        private bool parametersIsValid(Point offset)
+        {
+
+            if(account_textBox.Text.Length < 1)
+            {
+                showMessage("账号名为空", "错误", offset);
+                return false;
+            } else if(pwd_textBox.Text.Length < 6)
+            {
+                showMessage("密码长度错误", "错误", offset);
+                return false;
+            } 
+
+            return true;
+        }
+
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            selectID = Convert.ToInt64(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            account_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            pwd_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+            comment_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+        }
+
+        private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
             dbConn.Close();
+        }
 
-            reloadData();
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex != -1)
+            {
+                dataGridView1.Rows[e.RowIndex].Selected = true;
+                selectID = Convert.ToInt64(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                account_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                pwd_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                comment_textBox.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+            }
+                
+            
         }
     }
 }

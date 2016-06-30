@@ -1,6 +1,6 @@
-﻿namespace WeixinClient
+﻿namespace WeiXinClient
 {
-    partial class change
+    partial class ChangeForm
     {
         /// <summary>
         /// Required designer variable.
