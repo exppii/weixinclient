@@ -1,4 +1,4 @@
-﻿; LASDAT.nsi
+﻿; WeiXinClient.nsi
 ;
 ; This script is perhaps one of the simplest NSIs you can make. All of the
 ; optional settings are left to their default settings. The installer simply
@@ -13,10 +13,10 @@
 
 
 !define TEMP1 $R0
-!define PRODUCT_NAME "LASDAT";
-!define MUI_ICON "applications_internet_128.ico"
+!define PRODUCT_NAME "WeiXinClient";
+;!define MUI_ICON "applications_internet_128.ico"
 ; The name of the installer
-Name "${PRODUCT_NAME}应用管理平台"
+Name "国防科技大学微信管理平台"
 
 
 ; The file to write
@@ -164,15 +164,15 @@ FunctionEnd
 
 Function DownloadNetFramework4
 ;下载 .NET Framework 4.0
-  NSISdl::download /TRANSLATE2 '正在下载 %s' '正在连接...' '(剩余 1 秒)' '(剩余 1 分钟)' '(剩余 1 小时)' '(剩余 %u 秒)' '(剩余 %u 分钟)' '(剩余 %u 小时)' '已完成：%skB(%d%%) 大小：%skB 速度：%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'https://download.microsoft.com/download/1/B/E/1BE39E79-7E39-46A3-96FF-047F95396215/dotNetFx40_Full_setup.exe' '$TEMP\dotNetFx40_Full_setup.exe'
+  NSISdl::download /TRANSLATE2 '正在下载 %s' '正在连接...' '(剩余 1 秒)' '(剩余 1 分钟)' '(剩余 1 小时)' '(剩余 %u 秒)' '(剩余 %u 分钟)' '(剩余 %u 小时)' '已完成：%skB(%d%%) 大小：%skB 速度：%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe' '$TEMP\dotNetFx40_Full_x86_x64.exe'
   Pop $R0
   StrCmp $R0 "success" 0 +2
 
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 4.0 Full..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\dotNetFx40_Full_setup.exe /norestart' $R1
-  Delete "$TEMP\dotNetFx40_Full_setup.exe"
+  ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /quiet /norestart' $R1
+  Delete "$TEMP\dotNetFx40_Full_x86_x64.exe"
 
 FunctionEnd
 
@@ -213,38 +213,42 @@ end:
 SectionEnd
 
 
-
-
-Section "lasdat" ;
+Section "WeiXinClient" ;
   SectionIn RO
 
   SetOutPath $INSTDIR
 
   ; Put file there
-  File LASDAT.exe
-  File mfc140u.dll
-  File local.db
-  File mfcm140u.dll
-  File netsnmp.dll
-  File sqlite3.dll
+  File WeiXinClient.exe
+  File WeiXinClient.exe.manifest
+  File WeiXinClient.exe.config
+  File CefSharp.BrowserSubprocess.exe
+  File *.dll
+  File *.xml
+  File *.pak
+  File icudtl.dat
+  File natives_blob.bin
+  File snapshot_blob.bin
+  SetOutPath $INSTDIR\locales
+  File locales\*.pak
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
 SectionEnd
 
-Section "mib-librarys"
-  SectionIn RO
-
-  SetOutPath $INSTDIR\mibs\cisco-mibs
-  File mibs\cisco-mibs\*.my
-  SetOutPath $INSTDIR\mibs\h3c-mibs
-  File mibs\h3c-mibs\*.mib
-  SetOutPath $INSTDIR\mibs\ruijie-mibs
-  File mibs\ruijie-mibs\*.mib
-  SetOutPath $INSTDIR\mibs\base-mibs
-  File mibs\base-mibs\*.txt
+Section "桌面快捷方式"
+  SectionIn 1
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
 
 SectionEnd
 
+Section "加入开始菜单"
+  SectionIn 1
+  SetShellVarContext all
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+
+SectionEnd
 ;--------------------------------
 ;Uninstaller Section
 Section "Uninstall"
@@ -254,10 +258,7 @@ Section "Uninstall"
 
 ;Delete Files
 
-  RMDIR /r  "$INSTDIR\mibs\cisco-mibs\*.*"
-  RMDIR /r  "$INSTDIR\mibs\h3c-mibs\*.*"
-  RMDIR /r  "$INSTDIR\mibs\ruijie-mibs\*.*"
-  RMDIR /r  "$INSTDIR\mibs\base-mibs\*.*"
+  RMDIR /r  "$INSTDIR\locales\*.*"
   RMDir /r "$INSTDIR\*.*"
 
 ;Remove the installation directory
@@ -269,8 +270,6 @@ SetShellVarContext all
 
   RMDIR /r "$SMPROGRAMS\${PRODUCT_NAME}\*.*"
   RmDir  "$SMPROGRAMS\${PRODUCT_NAME}"
-
-
 
 SectionEnd
 
