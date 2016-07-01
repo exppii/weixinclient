@@ -143,7 +143,7 @@ Function DownloadNetFramework2
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 2.0 SP2..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\NetFx20SP2_x86.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\NetFx20SP2_x86.exe /norestart' $R1
   Delete "$TEMP\NetFx20SP2_x86.exe"
 
 FunctionEnd
@@ -157,7 +157,7 @@ Function DownloadNetFramework35
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 3.5 SP1..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\dotnetfx35.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\dotnetfx35.exe /norestart' $R1
   Delete "$TEMP\dotnetfx35.exe"
 
 FunctionEnd
@@ -171,7 +171,7 @@ Function DownloadNetFramework4
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 4.0 Full..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /norestart' $R1
   Delete "$TEMP\dotNetFx40_Full_x86_x64.exe"
 
 FunctionEnd
@@ -185,7 +185,7 @@ Function DownloadNetFramework45
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 4.5.2 ..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe /norestart' $R1
   Delete "$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
 
 FunctionEnd
