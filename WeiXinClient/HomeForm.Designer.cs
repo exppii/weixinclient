@@ -309,7 +309,7 @@ namespace WeiXinClient
 
         private const string KEY = "a528fbe0-0c45-4e7e-973b-02f13692d76d";
         private long selectID = 0;
-        private int selectRowIndex = 0;
+        private int selectRowIndex = -1;
         private System.Windows.Forms.Panel contralPanel;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox2;
