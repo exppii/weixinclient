@@ -212,6 +212,27 @@ end:
     ${ENDIF}
 SectionEnd
 
+Section -Visual C++ Redistributable
+  ;检测是否是需要的.NET Framework版本
+  SectionIn RO
+
+
+
+  ReadRegDword $R2 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" "Installed"
+  ${AndIf} $R2 != "1"
+        SetDetailsPrint textonly
+        DetailPrint "正在安装 Visual C++ Redistributable 2013..."
+        SetDetailsPrint listonly
+        SetOutPath "$TEMP"
+        SetOverwrite on
+        File "vcredist_x86.exe"
+        ExecWait '$TEMP\vcredist_x86.exe /q /norestart ' $R2
+        Delete "$TEMP\vcredist_x86.exe"
+  ${Else}
+    !insertmacro Log "VisualStudio DLLs to the standard package (C++) 2013 is installed."
+  ${EndIf}
+SectionEnd
+
 
 Section "WeiXinClient" ;
   SectionIn RO
