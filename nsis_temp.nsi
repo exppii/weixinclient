@@ -16,7 +16,7 @@
 !define PRODUCT_NAME "WeiXinClient";
 ;!define MUI_ICON "applications_internet_128.ico"
 ; The name of the installer
-Name "国防科技大学微信管理平台"
+Name "微信管理平台"
 
 
 ; The file to write
@@ -143,7 +143,7 @@ Function DownloadNetFramework2
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 2.0 SP2..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\NetFx20SP2_x86.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\NetFx20SP2_x86.exe /norestart' $R1
   Delete "$TEMP\NetFx20SP2_x86.exe"
 
 FunctionEnd
@@ -157,7 +157,7 @@ Function DownloadNetFramework35
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 3.5 SP1..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\dotnetfx35.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\dotnetfx35.exe /norestart' $R1
   Delete "$TEMP\dotnetfx35.exe"
 
 FunctionEnd
@@ -171,7 +171,7 @@ Function DownloadNetFramework4
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 4.0 Full..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /norestart' $R1
   Delete "$TEMP\dotNetFx40_Full_x86_x64.exe"
 
 FunctionEnd
@@ -185,7 +185,7 @@ Function DownloadNetFramework45
   SetDetailsPrint textonly
   DetailPrint "正在安装 .NET Framework 4.5.2 ..."
   SetDetailsPrint listonly
-  ExecWait '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe /quiet /norestart' $R1
+  ExecWait '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe /norestart' $R1
   Delete "$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
 
 FunctionEnd
@@ -210,6 +210,27 @@ label_no:
     Abort
 end:
     ${ENDIF}
+SectionEnd
+
+Section -Visual C++ Redistributable
+  ;检测是否是需要的.NET Framework版本
+  SectionIn RO
+
+
+
+  ReadRegDword $R2 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" "Installed"
+  ${AndIf} $R2 != "1"
+        SetDetailsPrint textonly
+        DetailPrint "正在安装 Visual C++ Redistributable 2013..."
+        SetDetailsPrint listonly
+        SetOutPath "$TEMP"
+        SetOverwrite on
+        File "vcredist_x86.exe"
+        ExecWait '$TEMP\vcredist_x86.exe /q /norestart ' $R2
+        Delete "$TEMP\vcredist_x86.exe"
+  ${Else}
+    !insertmacro Log "VisualStudio DLLs to the standard package (C++) 2013 is installed."
+  ${EndIf}
 SectionEnd
 
 

@@ -90,7 +90,14 @@ namespace WeiXinClient
 
         private void login_Click(object sender, EventArgs e)
         {
-
+            if(selectRowIndex == -1 || selectRowIndex == dataGridView1.Rows.Count -1)
+            {
+                var offset = new Point();
+                offset.X = Cursor.Position.X - 20;
+                offset.Y = Cursor.Position.Y - 80;
+                showMessage("当前未选中有效用户！！！", "错误", offset);
+                return;
+            }
             var acc = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
             var pwd = dataGridView1.Rows[selectRowIndex].Cells[2].Value.ToString();
             if (browser.Address == "https://mp.weixin.qq.com/" && acc.Length > 0 && pwd.Length > 0)
@@ -134,6 +141,12 @@ namespace WeiXinClient
             var offset = new Point();
             offset.X = Cursor.Position.X - 150;
             offset.Y = Cursor.Position.Y - 180;
+            if (selectRowIndex < 0 || selectRowIndex > dataGridView1.Rows.Count - 1)
+            {
+                showMessage("更改账号信息失败！\r\n请点击要更改的数据", "错误", offset);
+                return;
+            }
+
 
             if (!parametersIsValid(offset)) return;
 
@@ -159,6 +172,7 @@ namespace WeiXinClient
                     reloadData();
 
                     dataGridView1.Rows[0].Selected = false;
+                    
                     dataGridView1.Rows[selectRowIndex].Selected = true;
                     saveSelectInfo(selectRowIndex);
 
@@ -179,6 +193,11 @@ namespace WeiXinClient
             var offset = new Point();
             offset.X = Cursor.Position.X - 150;
             offset.Y = Cursor.Position.Y - 180;
+            if (selectRowIndex < 0 || selectRowIndex > dataGridView1.Rows.Count -1 )
+            {
+                showMessage("删除账号信息失败！\r\n请点击要删除的数据", "错误", offset);
+                return;
+            }
 
             string sql = @"delete  from user where id = @Id";
             SQLiteCommand command = new SQLiteCommand(sql, dbConn);
@@ -191,7 +210,8 @@ namespace WeiXinClient
                 {
                     showMessage("删除账号信息成功！！！", "成功", offset);
                     reloadData();
-                    if(dataGridView1.Rows.Count > 1)
+                    dataGridView1.Rows[0].Selected = false;
+                    if (dataGridView1.Rows.Count > 1)
                     {
                         dataGridView1.Rows[0].Selected = true;
                         saveSelectInfo(0);
@@ -234,14 +254,24 @@ namespace WeiXinClient
                 {
                     showMessage("新增账号信息成功！！！", "成功", offset);
                     reloadData();
+
                     dataGridView1.Rows[0].Selected = false;
+
+                    if (selectRowIndex == -1)
+                    {
+                        selectRowIndex = 0;
+                    } 
                     dataGridView1.Rows[selectRowIndex].Selected = true;
                     saveSelectInfo(selectRowIndex);
+
                 }
                 else
                 {
                     showMessage("新增账号信息失败！！！", "错误", offset);
                 }
+                
+
+
             }
             catch (Exception ex)
             {
@@ -268,6 +298,10 @@ namespace WeiXinClient
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if(e.RowIndex == dataGridView1.Rows.Count -1)
+            {
+                selectRowIndex = -1; return;
+            }
             saveSelectInfo(e.RowIndex);
         }
 

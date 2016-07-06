@@ -35,7 +35,7 @@ namespace WeiXinClient
                 Application.EnableVisualStyles();
                 const string dbPath = "./local.db";
                 //Application.Run(new LoginForm(dbPath));
-                Application.Run(new HomeForm(dbPath));
+                Application.Run(new LoginForm(dbPath));
             }
             else
             {

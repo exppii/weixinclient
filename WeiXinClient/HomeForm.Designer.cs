@@ -30,6 +30,7 @@ namespace WeiXinClient
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.insertButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,10 +49,10 @@ namespace WeiXinClient
             this.ColumnAcc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comment_textBox = new System.Windows.Forms.TextBox();
-            this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webpanel.SuspendLayout();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,7 +65,7 @@ namespace WeiXinClient
             this.insertButton.Location = new System.Drawing.Point(33, 246);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(75, 23);
-            this.insertButton.TabIndex = 1;
+            this.insertButton.TabIndex = 4;
             this.insertButton.Text = "新增";
             this.insertButton.UseVisualStyleBackColor = true;
             this.insertButton.Click += new System.EventHandler(this.insert_Click);
@@ -92,21 +93,21 @@ namespace WeiXinClient
             this.account_textBox.Location = new System.Drawing.Point(112, 48);
             this.account_textBox.Name = "account_textBox";
             this.account_textBox.Size = new System.Drawing.Size(125, 21);
-            this.account_textBox.TabIndex = 3;
+            this.account_textBox.TabIndex = 1;
             // 
             // pwd_textBox
             // 
             this.pwd_textBox.Location = new System.Drawing.Point(112, 109);
             this.pwd_textBox.Name = "pwd_textBox";
             this.pwd_textBox.Size = new System.Drawing.Size(125, 21);
-            this.pwd_textBox.TabIndex = 3;
+            this.pwd_textBox.TabIndex = 2;
             // 
             // deleteButton
             // 
             this.deleteButton.Location = new System.Drawing.Point(237, 246);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 1;
+            this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = " 删除";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.delete_Click);
@@ -116,7 +117,7 @@ namespace WeiXinClient
             this.updateButton.Location = new System.Drawing.Point(137, 246);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 1;
+            this.updateButton.TabIndex = 5;
             this.updateButton.Text = "更新";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.update_Click);
@@ -130,7 +131,7 @@ namespace WeiXinClient
             this.webpanel.Location = new System.Drawing.Point(391, 12);
             this.webpanel.Name = "webpanel";
             this.webpanel.Size = new System.Drawing.Size(1037, 792);
-            this.webpanel.TabIndex = 4;
+            this.webpanel.TabIndex = 0;
             // 
             // splitter1
             // 
@@ -145,7 +146,7 @@ namespace WeiXinClient
             this.login.Location = new System.Drawing.Point(36, 344);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(75, 23);
-            this.login.TabIndex = 1;
+            this.login.TabIndex = 0;
             this.login.Text = "登陆微信";
             this.login.UseVisualStyleBackColor = true;
             this.login.Click += new System.EventHandler(this.login_Click);
@@ -155,7 +156,7 @@ namespace WeiXinClient
             this.logout.Location = new System.Drawing.Point(162, 344);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(75, 23);
-            this.logout.TabIndex = 1;
+            this.logout.TabIndex = 2;
             this.logout.Text = "登出微信";
             this.logout.UseVisualStyleBackColor = true;
             this.logout.Click += new System.EventHandler(this.logout_Click);
@@ -229,6 +230,13 @@ namespace WeiXinClient
             this.ColumnCom.ReadOnly = true;
             this.ColumnCom.Width = 115;
             // 
+            // IndexColumn
+            // 
+            this.IndexColumn.HeaderText = "index";
+            this.IndexColumn.Name = "IndexColumn";
+            this.IndexColumn.ReadOnly = true;
+            this.IndexColumn.Visible = false;
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -265,13 +273,6 @@ namespace WeiXinClient
             this.comment_textBox.Size = new System.Drawing.Size(125, 21);
             this.comment_textBox.TabIndex = 3;
             // 
-            // IndexColumn
-            // 
-            this.IndexColumn.HeaderText = "index";
-            this.IndexColumn.Name = "IndexColumn";
-            this.IndexColumn.ReadOnly = true;
-            this.IndexColumn.Visible = false;
-            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -279,8 +280,9 @@ namespace WeiXinClient
             this.ClientSize = new System.Drawing.Size(1440, 816);
             this.Controls.Add(this.contralPanel);
             this.Controls.Add(this.webpanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HomeForm";
-            this.Text = "Form1";
+            this.Text = "微信管理平台";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
             this.webpanel.ResumeLayout(false);
             this.contralPanel.ResumeLayout(false);
@@ -307,7 +309,7 @@ namespace WeiXinClient
 
         private const string KEY = "a528fbe0-0c45-4e7e-973b-02f13692d76d";
         private long selectID = 0;
-        private int selectRowIndex = 0;
+        private int selectRowIndex = -1;
         private System.Windows.Forms.Panel contralPanel;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox2;
