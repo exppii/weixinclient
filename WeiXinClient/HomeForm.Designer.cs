@@ -49,10 +49,10 @@ namespace WeiXinClient
             this.ColumnAcc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comment_textBox = new System.Windows.Forms.TextBox();
-            this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.webpanel.SuspendLayout();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -99,6 +99,7 @@ namespace WeiXinClient
             // 
             this.pwd_textBox.Location = new System.Drawing.Point(112, 109);
             this.pwd_textBox.Name = "pwd_textBox";
+            this.pwd_textBox.PasswordChar = '*';
             this.pwd_textBox.Size = new System.Drawing.Size(125, 21);
             this.pwd_textBox.TabIndex = 2;
             // 
@@ -199,6 +200,8 @@ namespace WeiXinClient
             this.dataGridView1.Size = new System.Drawing.Size(363, 300);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
             // ColumnID
@@ -229,6 +232,13 @@ namespace WeiXinClient
             this.ColumnCom.Name = "ColumnCom";
             this.ColumnCom.ReadOnly = true;
             this.ColumnCom.Width = 115;
+            // 
+            // IndexColumn
+            // 
+            this.IndexColumn.HeaderText = "index";
+            this.IndexColumn.Name = "IndexColumn";
+            this.IndexColumn.ReadOnly = true;
+            this.IndexColumn.Visible = false;
             // 
             // groupBox1
             // 
@@ -265,13 +275,6 @@ namespace WeiXinClient
             this.comment_textBox.Name = "comment_textBox";
             this.comment_textBox.Size = new System.Drawing.Size(125, 21);
             this.comment_textBox.TabIndex = 3;
-            // 
-            // IndexColumn
-            // 
-            this.IndexColumn.HeaderText = "index";
-            this.IndexColumn.Name = "IndexColumn";
-            this.IndexColumn.ReadOnly = true;
-            this.IndexColumn.Visible = false;
             // 
             // HomeForm
             // 
