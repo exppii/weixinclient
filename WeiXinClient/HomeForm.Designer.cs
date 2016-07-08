@@ -44,14 +44,14 @@ namespace WeiXinClient
             this.contralPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comment_textBox = new System.Windows.Forms.TextBox();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAcc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comment_textBox = new System.Windows.Forms.TextBox();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -60,9 +60,9 @@ namespace WeiXinClient
             // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(23, 246);
+            this.insertButton.Location = new System.Drawing.Point(6, 246);
             this.insertButton.Name = "insertButton";
-            this.insertButton.Size = new System.Drawing.Size(75, 23);
+            this.insertButton.Size = new System.Drawing.Size(62, 23);
             this.insertButton.TabIndex = 4;
             this.insertButton.Text = "新增";
             this.insertButton.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@ namespace WeiXinClient
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 51);
+            this.label1.Location = new System.Drawing.Point(15, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 2;
@@ -80,7 +80,7 @@ namespace WeiXinClient
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 109);
+            this.label2.Location = new System.Drawing.Point(15, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 2;
@@ -88,14 +88,14 @@ namespace WeiXinClient
             // 
             // account_textBox
             // 
-            this.account_textBox.Location = new System.Drawing.Point(112, 48);
+            this.account_textBox.Location = new System.Drawing.Point(75, 48);
             this.account_textBox.Name = "account_textBox";
             this.account_textBox.Size = new System.Drawing.Size(125, 21);
             this.account_textBox.TabIndex = 1;
             // 
             // pwd_textBox
             // 
-            this.pwd_textBox.Location = new System.Drawing.Point(112, 109);
+            this.pwd_textBox.Location = new System.Drawing.Point(75, 106);
             this.pwd_textBox.Name = "pwd_textBox";
             this.pwd_textBox.PasswordChar = '*';
             this.pwd_textBox.Size = new System.Drawing.Size(125, 21);
@@ -103,9 +103,9 @@ namespace WeiXinClient
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(227, 246);
+            this.deleteButton.Location = new System.Drawing.Point(157, 246);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(64, 23);
             this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = " 删除";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -113,9 +113,9 @@ namespace WeiXinClient
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(125, 246);
+            this.updateButton.Location = new System.Drawing.Point(84, 246);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.Size = new System.Drawing.Size(62, 23);
             this.updateButton.TabIndex = 5;
             this.updateButton.Text = "更新";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -126,14 +126,14 @@ namespace WeiXinClient
             this.webpanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webpanel.Location = new System.Drawing.Point(335, 12);
+            this.webpanel.Location = new System.Drawing.Point(245, 12);
             this.webpanel.Name = "webpanel";
-            this.webpanel.Size = new System.Drawing.Size(1093, 792);
+            this.webpanel.Size = new System.Drawing.Size(1183, 792);
             this.webpanel.TabIndex = 0;
             // 
             // login
             // 
-            this.login.Location = new System.Drawing.Point(36, 344);
+            this.login.Location = new System.Drawing.Point(6, 367);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(75, 23);
             this.login.TabIndex = 0;
@@ -143,7 +143,7 @@ namespace WeiXinClient
             // 
             // logout
             // 
-            this.logout.Location = new System.Drawing.Point(191, 344);
+            this.logout.Location = new System.Drawing.Point(139, 367);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(75, 23);
             this.logout.TabIndex = 2;
@@ -159,7 +159,7 @@ namespace WeiXinClient
             this.contralPanel.Controls.Add(this.groupBox1);
             this.contralPanel.Location = new System.Drawing.Point(5, 1);
             this.contralPanel.Name = "contralPanel";
-            this.contralPanel.Size = new System.Drawing.Size(329, 803);
+            this.contralPanel.Size = new System.Drawing.Size(242, 803);
             this.contralPanel.TabIndex = 5;
             // 
             // groupBox2
@@ -169,7 +169,7 @@ namespace WeiXinClient
             this.groupBox2.Controls.Add(this.logout);
             this.groupBox2.Location = new System.Drawing.Point(7, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(317, 410);
+            this.groupBox2.Size = new System.Drawing.Size(227, 428);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作面板";
@@ -177,6 +177,7 @@ namespace WeiXinClient
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersVisible = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
             this.ColumnAcc,
@@ -186,48 +187,10 @@ namespace WeiXinClient
             this.dataGridView1.Location = new System.Drawing.Point(4, 20);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(308, 300);
+            this.dataGridView1.Size = new System.Drawing.Size(210, 324);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.insertButton);
-            this.groupBox1.Controls.Add(this.account_textBox);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.updateButton);
-            this.groupBox1.Controls.Add(this.comment_textBox);
-            this.groupBox1.Controls.Add(this.deleteButton);
-            this.groupBox1.Controls.Add(this.pwd_textBox);
-            this.groupBox1.Location = new System.Drawing.Point(7, 423);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 377);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = " 用户编辑区";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 178);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "备注:";
-            // 
-            // comment_textBox
-            // 
-            this.comment_textBox.Location = new System.Drawing.Point(112, 175);
-            this.comment_textBox.Name = "comment_textBox";
-            this.comment_textBox.Size = new System.Drawing.Size(125, 21);
-            this.comment_textBox.TabIndex = 3;
             // 
             // ColumnID
             // 
@@ -242,6 +205,7 @@ namespace WeiXinClient
             this.ColumnAcc.HeaderText = " 账号";
             this.ColumnAcc.Name = "ColumnAcc";
             this.ColumnAcc.ReadOnly = true;
+            this.ColumnAcc.Visible = false;
             this.ColumnAcc.Width = 75;
             // 
             // ColumnPwd
@@ -249,13 +213,15 @@ namespace WeiXinClient
             this.ColumnPwd.HeaderText = "密码";
             this.ColumnPwd.Name = "ColumnPwd";
             this.ColumnPwd.ReadOnly = true;
+            this.ColumnPwd.Visible = false;
             this.ColumnPwd.Width = 60;
             // 
             // ColumnCom
             // 
-            this.ColumnCom.HeaderText = "备注";
+            this.ColumnCom.HeaderText = "公众号名称";
             this.ColumnCom.Name = "ColumnCom";
             this.ColumnCom.ReadOnly = true;
+            this.ColumnCom.Width = 130;
             // 
             // IndexColumn
             // 
@@ -263,6 +229,42 @@ namespace WeiXinClient
             this.IndexColumn.Name = "IndexColumn";
             this.IndexColumn.ReadOnly = true;
             this.IndexColumn.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.insertButton);
+            this.groupBox1.Controls.Add(this.account_textBox);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.updateButton);
+            this.groupBox1.Controls.Add(this.comment_textBox);
+            this.groupBox1.Controls.Add(this.deleteButton);
+            this.groupBox1.Controls.Add(this.pwd_textBox);
+            this.groupBox1.Location = new System.Drawing.Point(7, 440);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(227, 360);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = " 用户编辑区";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 175);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "公众号名称:";
+            // 
+            // comment_textBox
+            // 
+            this.comment_textBox.Location = new System.Drawing.Point(75, 172);
+            this.comment_textBox.Name = "comment_textBox";
+            this.comment_textBox.Size = new System.Drawing.Size(125, 21);
+            this.comment_textBox.TabIndex = 3;
             // 
             // HomeForm
             // 

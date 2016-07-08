@@ -23,6 +23,7 @@ namespace WeiXinClient
             InitDB(dbPath);
             InitTable();
             InitBrowser();
+            this.dataGridView1.ColumnHeadersVisible = false;
         }
 
 
@@ -334,25 +335,29 @@ namespace WeiXinClient
             selectID = Convert.ToInt64(dataGridView1.Rows[index].Cells[4].Value.ToString());
         }
 
-        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (dataGridView1.CurrentCell.ColumnIndex == 2)//select target column
-            {
-                TextBox textBox = e.Control as TextBox;
-                if (textBox != null)
-                {
-                    textBox.UseSystemPasswordChar = true;
-                }
-            }
-        }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "ColumnPwd" && e.Value != null)
-    {
-                dataGridView1.Rows[e.RowIndex].Tag = e.Value;
-                e.Value = new String('*', e.Value.ToString().Length);
-            }
-        }
+
+
+
+        //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        //{
+        //    if (dataGridView1.CurrentCell.ColumnIndex == 2)//select target column
+        //    {
+        //        TextBox textBox = e.Control as TextBox;
+        //        if (textBox != null)
+        //        {
+        //            textBox.UseSystemPasswordChar = true;
+        //        }
+        //    }
+        //}
+
+        //    private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //    {
+        //        if (dataGridView1.Columns[e.ColumnIndex].Name == "ColumnPwd" && e.Value != null)
+        //{
+        //            dataGridView1.Rows[e.RowIndex].Tag = e.Value;
+        //            e.Value = new String('*', e.Value.ToString().Length);
+        //        }
+        //    }
     }
 }
