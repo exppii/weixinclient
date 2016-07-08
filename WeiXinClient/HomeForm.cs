@@ -101,7 +101,7 @@ namespace WeiXinClient
                 var offset = new Point();
                 offset.X = Cursor.Position.X - 20;
                 offset.Y = Cursor.Position.Y - 80;
-                showMessage("当前未选中有效用户！！！", "错误", offset);
+                MessageBox.Show("当前未选中有效用户！！！", "错误");
                 return;
             }
             var acc = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
@@ -135,26 +135,18 @@ namespace WeiXinClient
             }
         }
 
-        private void showMessage(string message, string title, Point point)
-        {
-            Form notify = new WeiXinClient.MyNotifyForm(message, title, point);
-            notify.Location = point;
-            notify.Show();
-        }
-
         private void update_Click(object sender, EventArgs e)
         {
-            var offset = new Point();
-            offset.X = Cursor.Position.X - 150;
-            offset.Y = Cursor.Position.Y - 180;
+           
             if (selectRowIndex < 0 || selectRowIndex > dataGridView1.Rows.Count - 1)
             {
-                showMessage("更改账号信息失败！\r\n请点击要更改的数据", "错误", offset);
+                
+                MessageBox.Show("更改账号信息失败！\r\n请点击要更改的数据！！", "!!错误!!");
                 return;
             }
 
 
-            if (!parametersIsValid(offset)) return;
+            if (!parametersIsValid()) return;
 
             string sql = @"update user set account = @Account, pwd = @Passwd, comment = @Comment where id = @Id";
             SQLiteCommand command = new SQLiteCommand(sql, dbConn);
@@ -173,7 +165,7 @@ namespace WeiXinClient
                
                 if (count == 1)
                 {
-                    showMessage("更新账号信息成功！！！","成功", offset);
+                    MessageBox.Show("更新账号信息成功！！！","成功");
 
                     reloadData();
 
@@ -183,12 +175,12 @@ namespace WeiXinClient
                     saveSelectInfo(selectRowIndex);
 
                 } else
-                { 
-                    showMessage("更新账号信息失败！！！", "错误", offset);
+                {
+                    MessageBox.Show("更新账号信息失败！！！", "错误");
                 }
             } catch(Exception ex)
             {
-                showMessage(ex.ToString(), "错误", offset);
+                MessageBox.Show(ex.ToString(), "错误");
             }
             
 
@@ -196,12 +188,10 @@ namespace WeiXinClient
 
         private void delete_Click(object sender, EventArgs e)
         {
-            var offset = new Point();
-            offset.X = Cursor.Position.X - 150;
-            offset.Y = Cursor.Position.Y - 180;
+            
             if (selectRowIndex < 0 || selectRowIndex > dataGridView1.Rows.Count -1 )
             {
-                showMessage("删除账号信息失败！\r\n请点击要删除的数据", "错误", offset);
+                MessageBox.Show("删除账号信息失败！\r\n请点击要删除的数据", "错误");
                 return;
             }
 
@@ -214,7 +204,7 @@ namespace WeiXinClient
 
                 if (count == 1)
                 {
-                    showMessage("删除账号信息成功！！！", "成功", offset);
+                    MessageBox.Show("删除账号信息成功！！！", "成功");
                     reloadData();
                     dataGridView1.Rows[0].Selected = false;
                     if (dataGridView1.Rows.Count > 1)
@@ -226,23 +216,20 @@ namespace WeiXinClient
                 }
                 else
                 {
-                    showMessage("删除账号信息失败！！！", "错误", offset);
+                    MessageBox.Show("删除账号信息失败！！！", "错误");
                 }
             }
             catch (Exception ex)
             {
-                    showMessage(ex.ToString(), "错误", offset);
+                MessageBox.Show(ex.ToString(), "错误");
             }
         }
 
         private void insert_Click(object sender, EventArgs e)
         {
 
-            var offset = new Point();
-            offset.X = Cursor.Position.X - 150;
-            offset.Y = Cursor.Position.Y - 180;
-
-            if (!parametersIsValid(offset)) return;
+   
+            if (!parametersIsValid()) return;
 
             try { 
 
@@ -258,7 +245,7 @@ namespace WeiXinClient
 
                 if (count == 1)
                 {
-                    showMessage("新增账号信息成功！！！", "成功", offset);
+                    MessageBox.Show("新增账号信息成功！！！", "成功");
                     reloadData();
 
                     dataGridView1.Rows[0].Selected = false;
@@ -273,7 +260,7 @@ namespace WeiXinClient
                 }
                 else
                 {
-                    showMessage("新增账号信息失败！！！", "错误", offset);
+                    MessageBox.Show("新增账号信息失败！！！", "错误");
                 }
                 
 
@@ -281,20 +268,20 @@ namespace WeiXinClient
             }
             catch (Exception ex)
             {
-                showMessage(ex.ToString(), "错误", offset);
+                MessageBox.Show(ex.ToString(), "错误");
             }
         }
 
-        private bool parametersIsValid(Point offset)
+        private bool parametersIsValid()
         {
 
             if(account_textBox.Text.Length < 1)
             {
-                showMessage("账号名为空", "错误", offset);
+                MessageBox.Show("账号名为空", "错误");
                 return false;
             } else if(pwd_textBox.Text.Length < 6)
             {
-                showMessage("密码长度错误", "错误", offset);
+                MessageBox.Show("密码长度错误", "错误");
                 return false;
             } 
 
