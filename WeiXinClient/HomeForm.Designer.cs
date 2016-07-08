@@ -44,14 +44,13 @@ namespace WeiXinClient
             this.contralPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comment_textBox = new System.Windows.Forms.TextBox();
             this.ColumnAcc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comment_textBox = new System.Windows.Forms.TextBox();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -133,7 +132,7 @@ namespace WeiXinClient
             // 
             // login
             // 
-            this.login.Location = new System.Drawing.Point(6, 367);
+            this.login.Location = new System.Drawing.Point(17, 367);
             this.login.Name = "login";
             this.login.Size = new System.Drawing.Size(75, 23);
             this.login.TabIndex = 0;
@@ -179,56 +178,17 @@ namespace WeiXinClient
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnID,
             this.ColumnAcc,
             this.ColumnPwd,
             this.ColumnCom,
             this.IndexColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(4, 20);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 20);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(210, 324);
+            this.dataGridView1.Size = new System.Drawing.Size(185, 324);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
-            // 
-            // ColumnID
-            // 
-            this.ColumnID.HeaderText = "ID";
-            this.ColumnID.Name = "ColumnID";
-            this.ColumnID.ReadOnly = true;
-            this.ColumnID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnID.Width = 35;
-            // 
-            // ColumnAcc
-            // 
-            this.ColumnAcc.HeaderText = " 账号";
-            this.ColumnAcc.Name = "ColumnAcc";
-            this.ColumnAcc.ReadOnly = true;
-            this.ColumnAcc.Visible = false;
-            this.ColumnAcc.Width = 75;
-            // 
-            // ColumnPwd
-            // 
-            this.ColumnPwd.HeaderText = "密码";
-            this.ColumnPwd.Name = "ColumnPwd";
-            this.ColumnPwd.ReadOnly = true;
-            this.ColumnPwd.Visible = false;
-            this.ColumnPwd.Width = 60;
-            // 
-            // ColumnCom
-            // 
-            this.ColumnCom.HeaderText = "公众号名称";
-            this.ColumnCom.Name = "ColumnCom";
-            this.ColumnCom.ReadOnly = true;
-            this.ColumnCom.Width = 130;
-            // 
-            // IndexColumn
-            // 
-            this.IndexColumn.HeaderText = "index";
-            this.IndexColumn.Name = "IndexColumn";
-            this.IndexColumn.ReadOnly = true;
-            this.IndexColumn.Visible = false;
             // 
             // groupBox1
             // 
@@ -265,6 +225,36 @@ namespace WeiXinClient
             this.comment_textBox.Name = "comment_textBox";
             this.comment_textBox.Size = new System.Drawing.Size(125, 21);
             this.comment_textBox.TabIndex = 3;
+            // 
+            // ColumnAcc
+            // 
+            this.ColumnAcc.HeaderText = " 账号";
+            this.ColumnAcc.Name = "ColumnAcc";
+            this.ColumnAcc.ReadOnly = true;
+            this.ColumnAcc.Visible = false;
+            this.ColumnAcc.Width = 75;
+            // 
+            // ColumnPwd
+            // 
+            this.ColumnPwd.HeaderText = "密码";
+            this.ColumnPwd.Name = "ColumnPwd";
+            this.ColumnPwd.ReadOnly = true;
+            this.ColumnPwd.Visible = false;
+            this.ColumnPwd.Width = 60;
+            // 
+            // ColumnCom
+            // 
+            this.ColumnCom.HeaderText = "公众号名称";
+            this.ColumnCom.Name = "ColumnCom";
+            this.ColumnCom.ReadOnly = true;
+            this.ColumnCom.Width = 150;
+            // 
+            // IndexColumn
+            // 
+            this.IndexColumn.HeaderText = "index";
+            this.IndexColumn.Name = "IndexColumn";
+            this.IndexColumn.ReadOnly = true;
+            this.IndexColumn.Visible = false;
             // 
             // HomeForm
             // 
@@ -308,7 +298,6 @@ namespace WeiXinClient
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox comment_textBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAcc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPwd;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCom;

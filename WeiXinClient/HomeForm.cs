@@ -55,18 +55,21 @@ namespace WeiXinClient
 
                 using (SQLiteDataReader read = comm.ExecuteReader())
                 {
-                    int count = 0;
                     while (read.Read())
                     {
                         var pwd = read.GetValue(read.GetOrdinal("pwd")).ToString();
 
                         dataGridView1.Rows.Add(new object[] {
-                        ++count,
                         read.GetValue(read.GetOrdinal("account")),  // Or column name like this
                         Encrypt.Decode(pwd,KEY),
                         read.GetValue(read.GetOrdinal("comment")),
                         read.GetValue(read.GetOrdinal("id"))
                          });
+                    }
+
+                    for (int i = 0; i < dataGridView1.Rows.Count -1; ++i)
+                    {
+                        dataGridView1.Rows[i].HeaderCell.Value = (i+1).ToString();
                     }
                 }
 
@@ -98,14 +101,11 @@ namespace WeiXinClient
         {
             if(selectRowIndex == -1 || selectRowIndex == dataGridView1.Rows.Count -1)
             {
-                var offset = new Point();
-                offset.X = Cursor.Position.X - 20;
-                offset.Y = Cursor.Position.Y - 80;
                 MessageBox.Show("当前未选中有效用户！！！", "错误");
                 return;
             }
-            var acc = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
-            var pwd = dataGridView1.Rows[selectRowIndex].Cells[2].Value.ToString();
+            var acc = dataGridView1.Rows[selectRowIndex].Cells[0].Value.ToString();
+            var pwd = dataGridView1.Rows[selectRowIndex].Cells[1].Value.ToString();
             if (browser.Address == "https://mp.weixin.qq.com/" && acc.Length > 0 && pwd.Length > 0)
             {
                 browser.ExecuteScriptAsync(string.Format("document.getElementById('account').value = '{0}'", acc));
@@ -316,10 +316,10 @@ namespace WeiXinClient
         private void saveSelectInfo(int index)
         {
             selectRowIndex = index;
-            account_textBox.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
-            pwd_textBox.Text = dataGridView1.Rows[index].Cells[2].Value.ToString();
-            comment_textBox.Text = dataGridView1.Rows[index].Cells[3].Value.ToString();
-            selectID = Convert.ToInt64(dataGridView1.Rows[index].Cells[4].Value.ToString());
+            account_textBox.Text = dataGridView1.Rows[index].Cells[0].Value.ToString();
+            pwd_textBox.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();
+            comment_textBox.Text = dataGridView1.Rows[index].Cells[2].Value.ToString();
+            selectID = Convert.ToInt64(dataGridView1.Rows[index].Cells[3].Value.ToString());
         }
 
 
