@@ -79,10 +79,15 @@ namespace WeiXinClient
         private ChromiumWebBrowser browser;
         private void InitBrowser()
         {
-            Cef.Initialize(new CefSettings());
+
+            var setting = new CefSettings();
+            
+
+            Cef.Initialize(setting);
             browser = new ChromiumWebBrowser("https://mp.weixin.qq.com/");
             //this.webBrowser1.Controls.Add(browser);
             this.webpanel.Controls.Add(browser);
+
             browser.Dock = DockStyle.Fill;
 
         }

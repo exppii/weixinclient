@@ -39,21 +39,19 @@ namespace WeiXinClient
             this.deleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.webpanel = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.login = new System.Windows.Forms.Button();
             this.logout = new System.Windows.Forms.Button();
             this.contralPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comment_textBox = new System.Windows.Forms.TextBox();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAcc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comment_textBox = new System.Windows.Forms.TextBox();
-            this.webpanel.SuspendLayout();
             this.contralPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,7 +60,7 @@ namespace WeiXinClient
             // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(33, 246);
+            this.insertButton.Location = new System.Drawing.Point(23, 246);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(75, 23);
             this.insertButton.TabIndex = 4;
@@ -105,7 +103,7 @@ namespace WeiXinClient
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(237, 246);
+            this.deleteButton.Location = new System.Drawing.Point(227, 246);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
             this.deleteButton.TabIndex = 6;
@@ -115,7 +113,7 @@ namespace WeiXinClient
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(137, 246);
+            this.updateButton.Location = new System.Drawing.Point(125, 246);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
             this.updateButton.TabIndex = 5;
@@ -128,19 +126,10 @@ namespace WeiXinClient
             this.webpanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webpanel.Controls.Add(this.splitter1);
-            this.webpanel.Location = new System.Drawing.Point(391, 12);
+            this.webpanel.Location = new System.Drawing.Point(335, 12);
             this.webpanel.Name = "webpanel";
-            this.webpanel.Size = new System.Drawing.Size(1037, 792);
+            this.webpanel.Size = new System.Drawing.Size(1093, 792);
             this.webpanel.TabIndex = 0;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 792);
-            this.splitter1.TabIndex = 0;
-            this.splitter1.TabStop = false;
             // 
             // login
             // 
@@ -154,7 +143,7 @@ namespace WeiXinClient
             // 
             // logout
             // 
-            this.logout.Location = new System.Drawing.Point(162, 344);
+            this.logout.Location = new System.Drawing.Point(191, 344);
             this.logout.Name = "logout";
             this.logout.Size = new System.Drawing.Size(75, 23);
             this.logout.TabIndex = 2;
@@ -170,7 +159,7 @@ namespace WeiXinClient
             this.contralPanel.Controls.Add(this.groupBox1);
             this.contralPanel.Location = new System.Drawing.Point(5, 1);
             this.contralPanel.Name = "contralPanel";
-            this.contralPanel.Size = new System.Drawing.Size(380, 803);
+            this.contralPanel.Size = new System.Drawing.Size(329, 803);
             this.contralPanel.TabIndex = 5;
             // 
             // groupBox2
@@ -180,7 +169,7 @@ namespace WeiXinClient
             this.groupBox2.Controls.Add(this.logout);
             this.groupBox2.Location = new System.Drawing.Point(7, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(370, 410);
+            this.groupBox2.Size = new System.Drawing.Size(317, 410);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "操作面板";
@@ -197,48 +186,12 @@ namespace WeiXinClient
             this.dataGridView1.Location = new System.Drawing.Point(4, 20);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(363, 300);
+            this.dataGridView1.Size = new System.Drawing.Size(308, 300);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
-            // 
-            // ColumnID
-            // 
-            this.ColumnID.HeaderText = "ID";
-            this.ColumnID.Name = "ColumnID";
-            this.ColumnID.ReadOnly = true;
-            this.ColumnID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnID.Width = 35;
-            // 
-            // ColumnAcc
-            // 
-            this.ColumnAcc.HeaderText = " 账号";
-            this.ColumnAcc.Name = "ColumnAcc";
-            this.ColumnAcc.ReadOnly = true;
-            this.ColumnAcc.Width = 85;
-            // 
-            // ColumnPwd
-            // 
-            this.ColumnPwd.HeaderText = "密码";
-            this.ColumnPwd.Name = "ColumnPwd";
-            this.ColumnPwd.ReadOnly = true;
-            this.ColumnPwd.Width = 85;
-            // 
-            // ColumnCom
-            // 
-            this.ColumnCom.HeaderText = "备注";
-            this.ColumnCom.Name = "ColumnCom";
-            this.ColumnCom.ReadOnly = true;
-            this.ColumnCom.Width = 115;
-            // 
-            // IndexColumn
-            // 
-            this.IndexColumn.HeaderText = "index";
-            this.IndexColumn.Name = "IndexColumn";
-            this.IndexColumn.ReadOnly = true;
-            this.IndexColumn.Visible = false;
             // 
             // groupBox1
             // 
@@ -255,7 +208,7 @@ namespace WeiXinClient
             this.groupBox1.Controls.Add(this.pwd_textBox);
             this.groupBox1.Location = new System.Drawing.Point(7, 423);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 377);
+            this.groupBox1.Size = new System.Drawing.Size(317, 377);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " 用户编辑区";
@@ -276,6 +229,41 @@ namespace WeiXinClient
             this.comment_textBox.Size = new System.Drawing.Size(125, 21);
             this.comment_textBox.TabIndex = 3;
             // 
+            // ColumnID
+            // 
+            this.ColumnID.HeaderText = "ID";
+            this.ColumnID.Name = "ColumnID";
+            this.ColumnID.ReadOnly = true;
+            this.ColumnID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnID.Width = 35;
+            // 
+            // ColumnAcc
+            // 
+            this.ColumnAcc.HeaderText = " 账号";
+            this.ColumnAcc.Name = "ColumnAcc";
+            this.ColumnAcc.ReadOnly = true;
+            this.ColumnAcc.Width = 75;
+            // 
+            // ColumnPwd
+            // 
+            this.ColumnPwd.HeaderText = "密码";
+            this.ColumnPwd.Name = "ColumnPwd";
+            this.ColumnPwd.ReadOnly = true;
+            this.ColumnPwd.Width = 60;
+            // 
+            // ColumnCom
+            // 
+            this.ColumnCom.HeaderText = "备注";
+            this.ColumnCom.Name = "ColumnCom";
+            this.ColumnCom.ReadOnly = true;
+            // 
+            // IndexColumn
+            // 
+            this.IndexColumn.HeaderText = "index";
+            this.IndexColumn.Name = "IndexColumn";
+            this.IndexColumn.ReadOnly = true;
+            this.IndexColumn.Visible = false;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -287,7 +275,6 @@ namespace WeiXinClient
             this.Name = "HomeForm";
             this.Text = "国防科技大学微信管理平台";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
-            this.webpanel.ResumeLayout(false);
             this.contralPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -314,16 +301,15 @@ namespace WeiXinClient
         private long selectID = 0;
         private int selectRowIndex = -1;
         private System.Windows.Forms.Panel contralPanel;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox comment_textBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAcc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPwd;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCom;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox comment_textBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndexColumn;
     }
 }
