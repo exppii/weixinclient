@@ -1,4 +1,4 @@
-ï»¿; WeiXinClient.nsi
+; WeiXinClient.nsi
 ;
 ; This script is perhaps one of the simplest NSIs you can make. All of the
 ; optional settings are left to their default settings. The installer simply
@@ -13,10 +13,10 @@
 
 
 !define TEMP1 $R0
-!define PRODUCT_NAME "WeiXinClient";
-;!define MUI_ICON "applications_internet_128.ico"
+!define PRODUCT_NAME "¹ú·À¿Æ´óÎ¢ĞÅ¹«ÖÚºÅ¹ÜÀíÆ½Ì¨";
+!define MUI_ICON "guofang256.ico"
 ; The name of the installer
-Name "å›½é˜²ç§‘æŠ€å¤§å­¦å¾®ä¿¡ç®¡ç†å¹³å°"
+Name "¹ú·À¿Æ´óÎ¢ĞÅ¹«ÖÚºÅ¹ÜÀíÆ½Ì¨"
 
 
 ; The file to write
@@ -59,10 +59,10 @@ RequestExecutionLevel admin
 ## Displays the serial dialog
 Function SerialPageShow
 
- !insertmacro MUI_HEADER_TEXT "æˆæƒéªŒè¯" "è¾“å…¥äº§å“å¯†é’¥ xxxx-xxxx-xxxx-xxxx-xxxx."
+ !insertmacro MUI_HEADER_TEXT "ÊÚÈ¨ÑéÖ¤" "ÊäÈë²úÆ·ÃÜÔ¿ xxxx-xxxx-xxxx-xxxx-xxxx."
 
  PassDialog::Dialog Serial            \
-                    /HEADINGTEXT 'è¯·è¾“å…¥æ­£ç¡®çš„äº§å“å¯†é’¥....' \
+                    /HEADINGTEXT 'ÇëÊäÈëÕıÈ·µÄ²úÆ·ÃÜÔ¿....' \
                     /CENTER             \
                     /BOXDASH 12  70 4 '' \
                     /BOXDASH 92  70 4 ''  \
@@ -85,12 +85,12 @@ Function SerialPageLeave
  Pop $R4
 
  ## A bit of validation
- StrCmp $R0 'aaaa' 0 +4
- StrCmp $R1 'aaaa' 0 +3
- StrCmp $R2 'aaaa' 0 +2
- StrCmp $R3 'aaaa' 0 +1
- StrCmp $R4 'aaaa' +3 0
-  MessageBox MB_OK|MB_ICONEXCLAMATION "æ‚¨è¾“å…¥çš„å¯†é’¥æ— æ•ˆï¼Œè¯·è¾“å…¥æ­£ç¡®å¯†é’¥!"
+ StrCmp $R0 'KMD8' 0 +4
+ StrCmp $R1 'W29N' 0 +3
+ StrCmp $R2 'D5CY' 0 +2
+ StrCmp $R3 'QS87' 0 +1
+ StrCmp $R4 'NB3C' +3 0
+  MessageBox MB_OK|MB_ICONEXCLAMATION "ÄúÊäÈëµÄÃÜÔ¿ÎŞĞ§£¬ÇëÊäÈëÕıÈ·ÃÜÔ¿!"
   Abort
 
  ## Display the values
@@ -100,7 +100,7 @@ FunctionEnd
 
 
 Function GetNetFrameworkVersion
-;è·å–.Net Frameworkç‰ˆæœ¬æ”¯æŒ
+;»ñÈ¡.Net Framework°æ±¾Ö§³Ö
     Push $1
     Push $0
     ReadRegDWORD $0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" "Install"
@@ -135,13 +135,13 @@ FunctionEnd
 
 
 Function DownloadNetFramework2
-;ä¸‹è½½ .NET Framework 2.0 SP2
-  NSISdl::download /TRANSLATE2 'æ­£åœ¨ä¸‹è½½ %s' 'æ­£åœ¨è¿æ¥...' '(å‰©ä½™ 1 ç§’)' '(å‰©ä½™ 1 åˆ†é’Ÿ)' '(å‰©ä½™ 1 å°æ—¶)' '(å‰©ä½™ %u ç§’)' '(å‰©ä½™ %u åˆ†é’Ÿ)' '(å‰©ä½™ %u å°æ—¶)' 'å·²å®Œæˆï¼š%skB(%d%%) å¤§å°ï¼š%skB é€Ÿåº¦ï¼š%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/c/6/e/c6e88215-0178-4c6c-b5f3-158ff77b1f38/NetFx20SP2_x86.exe' '$TEMP\NetFx20SP2_x86.exe'
+;ÏÂÔØ .NET Framework 2.0 SP2
+  NSISdl::download /TRANSLATE2 'ÕıÔÚÏÂÔØ %s' 'ÕıÔÚÁ¬½Ó...' '(Ê£Óà 1 Ãë)' '(Ê£Óà 1 ·ÖÖÓ)' '(Ê£Óà 1 Ğ¡Ê±)' '(Ê£Óà %u Ãë)' '(Ê£Óà %u ·ÖÖÓ)' '(Ê£Óà %u Ğ¡Ê±)' 'ÒÑÍê³É£º%skB(%d%%) ´óĞ¡£º%skB ËÙ¶È£º%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/c/6/e/c6e88215-0178-4c6c-b5f3-158ff77b1f38/NetFx20SP2_x86.exe' '$TEMP\NetFx20SP2_x86.exe'
   Pop $R0
   StrCmp $R0 "success" 0 +3
 
   SetDetailsPrint textonly
-  DetailPrint "æ­£åœ¨å®‰è£… .NET Framework 2.0 SP2..."
+  DetailPrint "ÕıÔÚ°²×° .NET Framework 2.0 SP2..."
   SetDetailsPrint listonly
   ExecWait '$TEMP\NetFx20SP2_x86.exe /norestart' $R1
   Delete "$TEMP\NetFx20SP2_x86.exe"
@@ -149,13 +149,13 @@ Function DownloadNetFramework2
 FunctionEnd
 
 Function DownloadNetFramework35
-;ä¸‹è½½ .NET Framework 3.5 SP1
-  NSISdl::download /TRANSLATE2 'æ­£åœ¨ä¸‹è½½ %s' 'æ­£åœ¨è¿æ¥...' '(å‰©ä½™ 1 ç§’)' '(å‰©ä½™ 1 åˆ†é’Ÿ)' '(å‰©ä½™ 1 å°æ—¶)' '(å‰©ä½™ %u ç§’)' '(å‰©ä½™ %u åˆ†é’Ÿ)' '(å‰©ä½™ %u å°æ—¶)' 'å·²å®Œæˆï¼š%skB(%d%%) å¤§å°ï¼š%skB é€Ÿåº¦ï¼š%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe' '$TEMP\dotnetfx35.exe'
+;ÏÂÔØ .NET Framework 3.5 SP1
+  NSISdl::download /TRANSLATE2 'ÕıÔÚÏÂÔØ %s' 'ÕıÔÚÁ¬½Ó...' '(Ê£Óà 1 Ãë)' '(Ê£Óà 1 ·ÖÖÓ)' '(Ê£Óà 1 Ğ¡Ê±)' '(Ê£Óà %u Ãë)' '(Ê£Óà %u ·ÖÖÓ)' '(Ê£Óà %u Ğ¡Ê±)' 'ÒÑÍê³É£º%skB(%d%%) ´óĞ¡£º%skB ËÙ¶È£º%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/2/0/E/20E90413-712F-438C-988E-FDAA79A8AC3D/dotnetfx35.exe' '$TEMP\dotnetfx35.exe'
   Pop $R0
   StrCmp $R0 "success" 0 +2
 
   SetDetailsPrint textonly
-  DetailPrint "æ­£åœ¨å®‰è£… .NET Framework 3.5 SP1..."
+  DetailPrint "ÕıÔÚ°²×° .NET Framework 3.5 SP1..."
   SetDetailsPrint listonly
   ExecWait '$TEMP\dotnetfx35.exe /norestart' $R1
   Delete "$TEMP\dotnetfx35.exe"
@@ -163,13 +163,13 @@ Function DownloadNetFramework35
 FunctionEnd
 
 Function DownloadNetFramework4
-;ä¸‹è½½ .NET Framework 4.0
-  NSISdl::download /TRANSLATE2 'æ­£åœ¨ä¸‹è½½ %s' 'æ­£åœ¨è¿æ¥...' '(å‰©ä½™ 1 ç§’)' '(å‰©ä½™ 1 åˆ†é’Ÿ)' '(å‰©ä½™ 1 å°æ—¶)' '(å‰©ä½™ %u ç§’)' '(å‰©ä½™ %u åˆ†é’Ÿ)' '(å‰©ä½™ %u å°æ—¶)' 'å·²å®Œæˆï¼š%skB(%d%%) å¤§å°ï¼š%skB é€Ÿåº¦ï¼š%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe' '$TEMP\dotNetFx40_Full_x86_x64.exe'
+;ÏÂÔØ .NET Framework 4.0
+  NSISdl::download /TRANSLATE2 'ÕıÔÚÏÂÔØ %s' 'ÕıÔÚÁ¬½Ó...' '(Ê£Óà 1 Ãë)' '(Ê£Óà 1 ·ÖÖÓ)' '(Ê£Óà 1 Ğ¡Ê±)' '(Ê£Óà %u Ãë)' '(Ê£Óà %u ·ÖÖÓ)' '(Ê£Óà %u Ğ¡Ê±)' 'ÒÑÍê³É£º%skB(%d%%) ´óĞ¡£º%skB ËÙ¶È£º%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe' '$TEMP\dotNetFx40_Full_x86_x64.exe'
   Pop $R0
   StrCmp $R0 "success" 0 +2
 
   SetDetailsPrint textonly
-  DetailPrint "æ­£åœ¨å®‰è£… .NET Framework 4.0 Full..."
+  DetailPrint "ÕıÔÚ°²×° .NET Framework 4.0 Full..."
   SetDetailsPrint listonly
   ExecWait '$TEMP\dotNetFx40_Full_x86_x64.exe /norestart' $R1
   Delete "$TEMP\dotNetFx40_Full_x86_x64.exe"
@@ -177,13 +177,13 @@ Function DownloadNetFramework4
 FunctionEnd
 
 Function DownloadNetFramework45
-;ä¸‹è½½ .NET Framework 4.5
-  NSISdl::download /TRANSLATE2 'æ­£åœ¨ä¸‹è½½ %s' 'æ­£åœ¨è¿æ¥...' '(å‰©ä½™ 1 ç§’)' '(å‰©ä½™ 1 åˆ†é’Ÿ)' '(å‰©ä½™ 1 å°æ—¶)' '(å‰©ä½™ %u ç§’)' '(å‰©ä½™ %u åˆ†é’Ÿ)' '(å‰©ä½™ %u å°æ—¶)' 'å·²å®Œæˆï¼š%skB(%d%%) å¤§å°ï¼š%skB é€Ÿåº¦ï¼š%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901907-x86-x64-AllOS-ENU.exe' '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe'
+;ÏÂÔØ .NET Framework 4.5
+  NSISdl::download /TRANSLATE2 'ÕıÔÚÏÂÔØ %s' 'ÕıÔÚÁ¬½Ó...' '(Ê£Óà 1 Ãë)' '(Ê£Óà 1 ·ÖÖÓ)' '(Ê£Óà 1 Ğ¡Ê±)' '(Ê£Óà %u Ãë)' '(Ê£Óà %u ·ÖÖÓ)' '(Ê£Óà %u Ğ¡Ê±)' 'ÒÑÍê³É£º%skB(%d%%) ´óĞ¡£º%skB ËÙ¶È£º%u.%01ukB/s' /TIMEOUT=7500 /NOIEPROXY 'http://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901907-x86-x64-AllOS-ENU.exe' '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe'
   Pop $R0
   StrCmp $R0 "success" 0 +2
 
   SetDetailsPrint textonly
-  DetailPrint "æ­£åœ¨å®‰è£… .NET Framework 4.5.2 ..."
+  DetailPrint "ÕıÔÚ°²×° .NET Framework 4.5.2 ..."
   SetDetailsPrint listonly
   ExecWait '$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe /norestart' $R1
   Delete "$TEMP\NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
@@ -193,7 +193,7 @@ FunctionEnd
 
 
 Section -.NET Framework
-  ;æ£€æµ‹æ˜¯å¦æ˜¯éœ€è¦çš„.NET Frameworkç‰ˆæœ¬
+  ;¼ì²âÊÇ·ñÊÇĞèÒªµÄ.NET Framework°æ±¾
   SectionIn RO
   Call GetNetFrameworkVersion
   Pop $R1
@@ -201,7 +201,7 @@ Section -.NET Framework
   ;${If} $R1 < '3.5.30729.4926'
   ${If} $R1 < '4.0.30319'
   ;${If} $R1 < '4.5.52747'
-    MessageBox MB_YESNO|MB_ICONQUESTION "æ­¤è½¯ä»¶è¿è¡Œéœ€è¦.NET Framework 4.0è¿è¡Œç¯å¢ƒï¼Œä½†æ‚¨æœºå™¨ä¸Šä¼¼ä¹æ²¡æœ‰å®‰è£…æ­¤ç¯å¢ƒã€‚$\r$\næ‚¨æœ‰ä¸¤ä¸ªé€‰æ‹©ï¼š$\r$\n1.æ‚¨è‡ªå·±åˆ°äº’è”ç½‘ä¸Šä¸‹è½½.NET Framework 4.0å®‰è£…ï¼Œç„¶åå†è¿è¡Œæ­¤è½¯ä»¶$\r$\n2.ä½¿ç”¨æ­¤å®‰è£…ç¨‹åºåœ¨çº¿ä¸‹è½½å¹¶å®‰è£….NET Framework 4.0$\r$\n$\r$\nç°åœ¨åœ¨çº¿ä¸‹è½½å¹¶å®‰è£….NET Framework 4.0,è¯·ç¡®è®¤æ‚¨çš„æœºå™¨å·²è¿æ¥äº’è”ç½‘.ç»§ç»­å—ï¼Ÿ" \
+    MessageBox MB_YESNO|MB_ICONQUESTION "´ËÈí¼şÔËĞĞĞèÒª.NET Framework 4.0ÔËĞĞ»·¾³£¬µ«Äú»úÆ÷ÉÏËÆºõÃ»ÓĞ°²×°´Ë»·¾³¡£$\r$\nÄúÓĞÁ½¸öÑ¡Ôñ£º$\r$\n1.Äú×Ô¼ºµ½»¥ÁªÍøÉÏÏÂÔØ.NET Framework 4.0°²×°£¬È»ºóÔÙÔËĞĞ´ËÈí¼ş$\r$\n2.Ê¹ÓÃ´Ë°²×°³ÌĞòÔÚÏßÏÂÔØ²¢°²×°.NET Framework 4.0$\r$\n$\r$\nÏÖÔÚÔÚÏßÏÂÔØ²¢°²×°.NET Framework 4.0,ÇëÈ·ÈÏÄúµÄ»úÆ÷ÒÑÁ¬½Ó»¥ÁªÍø.¼ÌĞøÂğ£¿" \
     /SD IDYES IDYES label_yes IDNO label_no
 label_yes:
       Call DownloadNetFramework4
@@ -212,24 +212,20 @@ end:
     ${ENDIF}
 SectionEnd
 
-Section -Visual C++ Redistributable
-  ;æ£€æµ‹æ˜¯å¦æ˜¯éœ€è¦çš„.NET Frameworkç‰ˆæœ¬
+Section "Visual C++ Redistributable"
+  ;¼ì²âÊÇ·ñÊÇĞèÒªµÄ.NET Framework°æ±¾
   SectionIn RO
 
-
-
   ReadRegDword $R2 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\VC\Runtimes\x86" "Installed"
-  ${AndIf} $R2 != "1"
+  ${If} $R2 != "1"
         SetDetailsPrint textonly
-        DetailPrint "æ­£åœ¨å®‰è£… Visual C++ Redistributable 2013..."
+        DetailPrint "ÕıÔÚ°²×° Visual C++ Redistributable 2013..."
         SetDetailsPrint listonly
         SetOutPath "$TEMP"
         SetOverwrite on
         File "vcredist_x86.exe"
         ExecWait '$TEMP\vcredist_x86.exe /q /norestart ' $R2
         Delete "$TEMP\vcredist_x86.exe"
-  ${Else}
-    !insertmacro Log "VisualStudio DLLs to the standard package (C++) 2013 is installed."
   ${EndIf}
 SectionEnd
 
@@ -237,12 +233,15 @@ SectionEnd
 Section "WeiXinClient" ;
   SectionIn RO
 
+  SetOutPath $INSTDIR\locales
+  File locales\*.pak
+
   SetOutPath $INSTDIR
 
   ; Put file there
-  File WeiXinClient.exe
-  File WeiXinClient.exe.manifest
-  File WeiXinClient.exe.config
+  File ${PRODUCT_NAME}.exe
+  File ${PRODUCT_NAME}.exe.manifest
+  File ${PRODUCT_NAME}.exe.config
   File CefSharp.BrowserSubprocess.exe
   File *.dll
   File *.xml
@@ -250,23 +249,22 @@ Section "WeiXinClient" ;
   File icudtl.dat
   File natives_blob.bin
   File snapshot_blob.bin
-  SetOutPath $INSTDIR\locales
-  File locales\*.pak
+  
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
 SectionEnd
 
-Section "æ¡Œé¢å¿«æ·æ–¹å¼"
+Section "×ÀÃæ¿ì½İ·½Ê½"
   SectionIn 1
   CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
 
 SectionEnd
 
-Section "åŠ å…¥å¼€å§‹èœå•"
+Section "¼ÓÈë¿ªÊ¼²Ëµ¥"
   SectionIn 1
   SetShellVarContext all
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Ğ¶ÔØ.lnk" "$INSTDIR\Uninstall.exe"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
 
 SectionEnd

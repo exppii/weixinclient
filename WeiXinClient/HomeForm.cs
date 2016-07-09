@@ -21,9 +21,9 @@ namespace WeiXinClient
         {
             InitializeComponent();
             InitDB(dbPath);
-            InitTable();
             InitBrowser();
-            this.dataGridView1.ColumnHeadersVisible = false;
+            InitTable();
+            
         }
 
 
@@ -85,14 +85,17 @@ namespace WeiXinClient
         {
 
             var setting = new CefSettings();
-            
-
-            Cef.Initialize(setting);
+            setting.CefCommandLineArgs.Add("--ash-host-window-bounds", "1366x768");
+            setting.CefCommandLineArgs.Add("--window-size", "1366,768");
+            Cef.Initialize(setting,true,true);
             browser = new ChromiumWebBrowser("https://mp.weixin.qq.com/");
             //this.webBrowser1.Controls.Add(browser);
             this.webpanel.Controls.Add(browser);
 
             browser.Dock = DockStyle.Fill;
+
+            browser.LoadingStateChanged += OnLoadingStateChanged;
+
 
         }
      
@@ -118,7 +121,7 @@ namespace WeiXinClient
             {
                 browser.ExecuteScriptAsync("alert('请退出当前登录帐号！！！'，'错误')");
             }
-
+           
 
         }
 
@@ -301,6 +304,7 @@ namespace WeiXinClient
         private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             dbConn.Close();
+            Cef.Shutdown();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -321,30 +325,15 @@ namespace WeiXinClient
             comment_textBox.Text = dataGridView1.Rows[index].Cells[2].Value.ToString();
             selectID = Convert.ToInt64(dataGridView1.Rows[index].Cells[3].Value.ToString());
         }
+ 
 
+        private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
+        {
+            //zoomlevel *= 0.8;
+            //browser.ExecuteScriptAsync(string.Format("document.body.style.zoom={0}", zoomlevel));
+            browser.SetZoomLevel(-0.7);
 
+        }
 
-
-
-        //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        //{
-        //    if (dataGridView1.CurrentCell.ColumnIndex == 2)//select target column
-        //    {
-        //        TextBox textBox = e.Control as TextBox;
-        //        if (textBox != null)
-        //        {
-        //            textBox.UseSystemPasswordChar = true;
-        //        }
-        //    }
-        //}
-
-        //    private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //    {
-        //        if (dataGridView1.Columns[e.ColumnIndex].Name == "ColumnPwd" && e.Value != null)
-        //{
-        //            dataGridView1.Rows[e.RowIndex].Tag = e.Value;
-        //            e.Value = new String('*', e.Value.ToString().Length);
-        //        }
-        //    }
     }
 }

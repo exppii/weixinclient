@@ -30,7 +30,6 @@ namespace WeiXinClient
                 Form main_form = new HomeForm(localDBPath);
                 main_form.StartPosition = FormStartPosition.CenterScreen;
                 main_form.ShowDialog();
-                
                 this.Close();
             } else
             {
